@@ -1,0 +1,137 @@
+{% extends "format.html" %}
+
+{% block title %}
+    Availability
+{% endblock %}
+
+{% block main %}
+    <form action="/availability" method="post" id = "form">
+        <div class="mb-3">
+            <div id = "availblock">
+                <p>Input Time Preferences</p>
+                <div id = "buttons">
+                </div>
+                
+                <div id = "timeprefs">
+
+
+                </div>
+                <input id = "finaltimes" name="finaltimes"></input>
+            </div>
+            <div id = "preferences">
+                <p>Choose Course</p>
+                <select name = "pref" id = "pref" class = "form-select">
+                    {% for course in courses %}
+                    <option> {{ course }}</option>
+                    {% endfor %}
+                </select> 
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+
+    <script> 
+        let availblock = document.querySelector("#availblock");
+        let timeprefs = document.querySelector("#timeprefs");
+        let times = ["8am-9am", "9am-10am", "10am-11am", "11am-12pm", "12pm-1pm", "1pm-2pm", "2pm-3pm", "3pm-4pm", "4pm-5pm", "5pm-6pm", "6pm-7pm", "7pm-8pm", "8pm-9pm",
+        "9pm-10pm", "10pm-11pm", "11pm-12pm", "12am-1am", "1am-2am"];
+        
+        
+        let form = document.querySelector("form");
+        let finaltimes = document.querySelector("#finaltimes");
+        let buttons = document.querySelector("#buttons");
+
+        // initialize first select
+        let first = document.createElement("select");
+        first.setAttribute("id", "time0");
+        first.setAttribute("class", "time form-select");
+        first.setAttribute("name", "time0");
+        console.log(first.value);
+        timeprefs.appendChild(first);
+
+        for (let i = 0; i < times.length; i++)
+            {
+                let option = document.createElement("option");
+                option.textContent = times[i];
+                first.appendChild(option);
+            }
+
+        // create add for user to input more times
+        let add = document.createElement("button");
+        add.setAttribute("id", "add");
+        add.setAttribute("class", "btn btn-outline-secondary");
+        add.setAttribute("type", "button");
+        add.textContent  = "Add";
+        buttons.appendChild(add);
+    
+
+        // create update button
+        let update = document.createElement("button");
+        update.setAttribute("id", "update");
+        update.setAttribute("type", "button");
+        update.setAttribute("class", "btn btn-outline-success");
+        update.textContent  = "Update";
+        buttons.appendChild(update);
+
+        document.getElementById("add").addEventListener("click", myFunction);
+        document.getElementById("update").addEventListener("click", updateVals);
+
+        let data = [];
+        let text_data = "";
+        let real_data = [];
+
+        let i = 1;
+        function myFunction() {
+                
+            let cur = document.createElement("select");
+            cur.setAttribute("name", `time${i}`)
+            cur.setAttribute("id", `time${i}`)
+            cur.setAttribute("class", "time form-select")
+            console.log(cur);
+            timeprefs.appendChild(cur);
+
+            for (let i = 0; i < times.length; i++)
+            {
+                let option = document.createElement("option");
+                option.textContent = times[i];
+                cur.appendChild(option);
+            }
+            
+            data = document.querySelectorAll(".time");
+            textdata = "";
+            real_data = []
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                real_data.push(data[i].value);
+            }
+            
+           
+            real_data = real_data.toString();
+
+            finaltimes.value = real_data;
+            console.log(finaltimes.value);
+            i += 1;   
+        }
+
+        function updateVals()
+        {
+            data = document.querySelectorAll(".time");
+            textdata = "";
+            real_data = []
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                real_data.push(data[i].value);
+            }
+            
+            real_data = real_data.toString();
+
+            finaltimes.value = real_data;
+            console.log(finaltimes.value);
+        }
+               
+    </script>
+
+
+{% endblock %}
+
+

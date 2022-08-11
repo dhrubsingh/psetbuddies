@@ -1,0 +1,33 @@
+{% extends "format.html" %}
+
+{% block title %}
+    Matches
+{% endblock %}
+
+{% block main %}
+<table class="table tablestriped">
+    <thead>
+        <tr>
+            <th class="text-start">User match</th>
+            <th class="text-start">Course</th>
+            <th class="text-start">Time preference</th>
+            <th class="text-start">Matched on</th>
+        </tr>
+    </thead>
+   <tbody>
+        {% for entry in history%}
+        <tr>
+            <td class = "text-start">{{ entry[0] }}</td>
+            <td class = "text-start">{{ entry[1] }}</td>
+            <td class = "text-start">{{ entry[2] }}</td>
+            <td class = "text-start">{{ entry[3] }}</td>
+        </tr>
+        {% endfor%}
+    
+        
+    </tbody>
+    <tfoot>
+     
+    </tfoot>
+</table>
+{% endblock %}

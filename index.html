@@ -1,0 +1,47 @@
+{% extends "format.html" %}
+
+{% block title %}
+    index
+{% endblock %}
+
+{% block main %}
+    <h1 class = "display-6">Current user: {{ current_user }}</h1>
+    <h1 class = "display-6">Chosen time: {% for t in time %} {{ t }}, {% endfor %}</h1>
+    <h1 class = "display-6">Chosen course: {{ course }}</h1>
+
+    <table class="table tablestriped">
+        <thead>
+            <tr>
+                <th class="text-start">User match</th>
+                <th class="text-start">Contact info</th>
+                <th class="text-start">Time</th>
+            </tr>
+        </thead>
+       <tbody>
+            {% for match in matches%}
+            <tr>
+                <td class = "text-start">{{ match[0] }}</td>
+                <td class = "text-start">{{ match[2] }}</td>
+                <td class = "text-start">{{ match[1] }}</td>
+            </tr>
+            {% endfor%}
+        
+            
+        </tbody>
+        <tfoot>
+         
+        </tfoot>
+    </table>
+
+    
+{% endblock %}
+
+
+
+
+
+
+            
+    
+      
+       
